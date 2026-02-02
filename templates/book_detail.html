@@ -1,0 +1,20 @@
+<div style="text-align:center;">
+    <h1>{{ book.title }}</h1>
+    <p>Автор: {{ book.author }}</p>
+    <p>Цена: {{ book.price }}</p>
+    <p>Страницы: {{ book.pages }}</p>
+    <p>Дата публикации: {{ book.published_date }}</p>
+    <p>{{ book.description }}</p>
+
+    {% if book.cover %}
+        <img src="{{ book.cover.url }}" alt="{{ book.title }}" width="300">
+    {% endif %}
+
+    {% if book.file %}
+        <p><a href="{{ book.file.url }}">Скачать книгу</a></p>
+    {% endif %}
+
+    {% if book.website %}
+        <p><a href="{{ book.website }}">Сайт книги</a></p>
+    {% endif %}
+</div>

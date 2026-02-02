@@ -1,0 +1,15 @@
+<h1 style="text-align:center;">Список книг</h1>
+
+<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px;">
+{% for book in books %}
+    <div style="text-align:center; border:1px solid #ccc; padding:10px; width:220px;">
+        {% if book.cover %}
+            <img src="{{ book.cover.url }}" alt="{{ book.title }}" width="200" height="300">
+        {% endif %}
+        <h2>{{ book.title }}</h2>
+        <p>Автор: {{ book.author }}</p>
+        <p>Цена: {{ book.price }}</p>
+        <a href="{% url 'book_detail' book.id %}">Подробнее</a>
+    </div>
+{% endfor %}
+</div>
