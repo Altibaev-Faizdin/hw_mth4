@@ -1,0 +1,31 @@
+<h1>Список туристов</h1>
+
+{% for person in persons %}
+    <p>
+        <b>{{ person }}</b><br>
+
+        {% if person.photo %}
+            <img src="{{ person.photo.url }}" width="60" style="border-radius: 8px;"><br>
+        {% endif %}
+
+        Тур: {% if person.tour %} {{ person.tour.title }} {% else %} нет тура {% endif %}<br>
+
+        Категории:
+        {% for cat in person.categories.all %}
+            {{ cat.name }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            нет категории
+        {% endfor %}
+        <br>
+
+        Отзывы:
+        <ul>
+            {% for review in person.reviews.all %}
+                <li>{{ review.text }}</li>
+            {% empty %}
+                <li>Отзывов пока нет</li>
+            {% endfor %}
+        </ul>
+    </p>
+    <hr>
+{% endfor %}
