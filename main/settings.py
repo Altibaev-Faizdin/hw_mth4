@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'book',
     'relation_db',
+    'myShop',
 ]
 
 MIDDLEWARE = [

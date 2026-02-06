@@ -1,0 +1,11 @@
+<h2>Продукты категории: {{ category.title }}</h2>
+
+<ul>
+    {% for product in products %}
+        <li>{{ product.title }} — {{ product.cost }} сом</li>
+    {% empty %}
+        <li>В этой категории пока нет продуктов</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'categories' %}">← Назад к категориям</a>
