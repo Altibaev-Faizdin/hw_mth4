@@ -1,15 +1,23 @@
-<h1 style="text-align:center;">Список книг</h1>
+<center>
+    <a href="{% url 'create_book' %}">
+        <button>Добавить книгу</button>
+    </a>
+</center>
+
+<br>
 
 <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px;">
 {% for book in books %}
-    <div style="text-align:center; border:1px solid #ccc; padding:10px; width:220px;">
+    <div style="border:1px solid #ccc; padding:10px; width:220px; text-align:center;">
         {% if book.cover %}
-            <img src="{{ book.cover.url }}" alt="{{ book.title }}" width="200" height="300">
+            <img src="{{ book.cover.url }}" width="200" height="280">
         {% endif %}
-        <h2>{{ book.title }}</h2>
-        <p>Автор: {{ book.author }}</p>
-        <p>Цена: {{ book.price }}</p>
-        <a href="{% url 'book_detail' book.id %}">Подробнее</a>
+        <h3>{{ book.title }}</h3>
+        <p>{{ book.author }}</p>
+
+        <a href="{% url 'book_detail' book.id %}">Подробнее</a><br>
+        <a href="{% url 'update_book' book.id %}">Редактировать</a><br>
+        <a href="{% url 'delete_book' book.id %}">Удалить</a>
     </div>
 {% endfor %}
 </div>
