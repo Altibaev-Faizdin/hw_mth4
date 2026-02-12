@@ -1,0 +1,11 @@
+<center>
+<h1>Регистрация резюме</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Зарегистрироваться</button>
+</form>
+
+<a href="{% url 'login' %}">Уже есть аккаунт?</a>
+</center>
