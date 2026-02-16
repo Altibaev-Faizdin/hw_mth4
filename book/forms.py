@@ -1,5 +1,6 @@
 from django import forms
-from book.models import Book
+from .models import Book
+
 
 class BookForm(forms.ModelForm):
     class Meta:

@@ -38,6 +38,26 @@ class RegisterResumeForm(UserCreationForm):
             'github',
         ]
 
+    def save(self, commit=True):
+        user = super().save(commit=commit)
+
+        Resume.objects.create(
+            user=user,
+            full_name=self.cleaned_data['full_name'],
+            age=self.cleaned_data['age'],
+            phone=self.cleaned_data['phone'],
+            email=self.cleaned_data['email'],
+            city=self.cleaned_data['city'],
+            education=self.cleaned_data['education'],
+            experience=self.cleaned_data['experience'],
+            skills=self.cleaned_data['skills'],
+            about=self.cleaned_data['about'],
+            desired_position=self.cleaned_data['desired_position'],
+            github=self.cleaned_data['github'],
+        )
+
+        return user
+
 
 class LoginFormWithCaptcha(AuthenticationForm):
     captcha = CaptchaField()

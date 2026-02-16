@@ -1,4 +1,11 @@
 <center>
+<form method="get">
+    <input type="text" name="q" placeholder="Поиск книги..." value="{{ query }}">
+    <button type="submit">Найти</button>
+</form>
+</center>
+
+<center>
     <a href="{% url 'create_book' %}">
         <button>Добавить книгу</button>
     </a>
@@ -7,7 +14,7 @@
 <br>
 
 <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px;">
-{% for book in books %}
+{% for book in page_obj %}
     <div style="border:1px solid #ccc; padding:10px; width:220px; text-align:center;">
         {% if book.cover %}
             <img src="{{ book.cover.url }}" width="200" height="280">
@@ -19,10 +26,35 @@
         <a href="{% url 'update_book' book.id %}">Редактировать</a><br>
         <a href="{% url 'delete_book' book.id %}">Удалить</a>
     </div>
+{% empty %}
+    <p>Книги не найдены</p>
 {% endfor %}
 </div>
 
-<form action="/logout/" method="post">
-    {%  csrf_token  %}
+<br><br>
+
+
+<center>
+<div>
+    {% if page_obj.has_previous %}
+        <a href="?page=1{% if query %}&q={{ query }}{% endif %}">Первая</a>
+        <a href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">Назад</a>
+    {% endif %}
+
+    <span>
+        Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}">Вперед</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}{% if query %}&q={{ query }}{% endif %}">Последняя</a>
+    {% endif %}
+</div>
+</center>
+
+<br>
+
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
     <button type="submit">Выйти из аккаунта</button>
 </form>
